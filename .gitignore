@@ -1,0 +1,49 @@
+# Ignore Terraform state files (contain sensitive info)
+terraform.tfstate
+terraform.tfstate.backup
+*.tfstate
+*.tfstate.*
+
+# Ignore Terraform crash logs and logs
+crash.log
+*.log
+
+# Ignore Terraform plan files
+*.tfplan
+
+# Ignore Terraform provider-specific files
+.terraform/
+.terraform.lock.hcl
+
+# Ignore environment variable files
+.env
+*.env
+
+# Ignore SSH keys (if stored locally for EC2 access)
+*.pem
+*.key
+id_rsa
+id_rsa.pub
+
+# Ignore output files
+*.tfvars
+*.tfvars.json
+
+# Ignore Terraform variable files
+var.tf
+
+# Ignore text files related to Terraform documentation
+terraform.txt
+terraform_variable_creation.txt
+
+# Ignore AWS credentials file (very sensitive)
+alina_terraform_accessKeys.csv
+
+# Ignore IDE/editor-specific files
+.vscode/
+.idea/
+*.iml
+
+# Ignore system-specific files
+.DS_Store
+Thumbs.db
