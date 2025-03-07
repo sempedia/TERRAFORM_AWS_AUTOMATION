@@ -51,3 +51,6 @@ alina_terraform_accessKeys.csv
 # Ignore system-specific files
 .DS_Store
 Thumbs.db
+
+# Ignore System Design Directory
+adr/
