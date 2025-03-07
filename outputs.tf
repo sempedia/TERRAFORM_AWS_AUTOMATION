@@ -1,6 +1,7 @@
 # Elastic IP Output Value will output the Public IP address
 output "eip_output" {
-  value = aws_eip.TF_Elastic_IP.public_ip
+  value = aws_eip.TF_Elastic_IP # public.ip was erased and we will see all attributes 
+  # of the EIP in the output.
 }
 
 # S3 Bucket Output Value will output the arn number of the s3 bucket 

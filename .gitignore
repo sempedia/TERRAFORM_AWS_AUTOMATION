@@ -28,9 +28,13 @@ id_rsa.pub
 # Ignore output files
 *.tfvars
 *.tfvars.json
+outputs.tf
 
 # Ignore Terraform variable files
-var.tf
+variables.tf
+
+# Ignote Github token files
+Terraform_Token_Github.odt
 
 # Ignore text files related to Terraform documentation
 terraform.txt

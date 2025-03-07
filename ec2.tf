@@ -1,18 +1,27 @@
-# Configure the AWS Provider
-provider "aws" {
-  region = "us-east-1"
-  access_key = var.TERRAFORM_AWS_ACCESS_KEY
-  secret_key = var.TERRAFORM_AWS_SECRET_ACCESS_KEY
-
-}
-
-
 # Configure EC2 Instance with the Amazon Linux 2023 AMI
 resource "aws_instance" "ec2" {
-  ami           = "ami-05b10e08d247fb927"  # Using the specific AMI ID
-  instance_type = "t2.micro"
+  ami                    = var.ami_id
+  instance_type          = var.instance_type
+  key_name               = var.key_name
+  vpc_security_group_ids = var.vpc_security_group_ids
+  user_data              = var.user_data_script
 
   tags = {
     Name = "TF_EC2"
   }
 }
+
+
+resource "aws_instance" "ec2-2" {
+  ami                    = var.ami_id
+  instance_type          = var.instance_type
+  key_name               = var.key_name
+  vpc_security_group_ids = var.vpc_security_group_ids
+
+  user_data = var.user_data_script
+
+  tags = {
+    Name = "TF_EC2_2"
+  }
+}
+
