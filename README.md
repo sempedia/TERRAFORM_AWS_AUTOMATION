@@ -1,9 +1,9 @@
-# EC2 Terraform Repo
+# TERRAFORM_AWS_AUTOMATION
 
 This repository contains Terraform configurations to deploy and manage AWS infrastructure using Infrastructure as Code (IaC).
 
 ## 📌 Features
-✅ Deploys an Amazon EC2 instance with customizable configurations.
+✅ Deploys multiple Amazon EC2 instances with customizable configurations.
 ✅ Configures Elastic IPs (EIP) for static public IP assignments.
 ✅ Manages IAM roles and permissions for secure access.
 ✅ Creates S3 buckets with security policies.
@@ -70,7 +70,6 @@ GitHub Repository Name & Settings
 
 ## Project Structure
 TERRAFORM_AWS_AUTOMATION
-
 .
 ├── C4_Diagram.puml
 ├── environments
@@ -126,8 +125,6 @@ TERRAFORM_AWS_AUTOMATION
 └── variables.tf
 
 13 directories, 40 files
-
-
 
 
 ## 📝 Notes
