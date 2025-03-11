@@ -69,6 +69,7 @@ VPC Subnets and Routes
 GitHub Repository Name & Settings
 
 ## Project Structure
+```
 TERRAFORM_AWS_AUTOMATION
 .
 ├── C4_Diagram.puml
@@ -125,7 +126,7 @@ TERRAFORM_AWS_AUTOMATION
 └── variables.tf
 
 13 directories, 40 files
-
+```
 
 ## 📝 Notes
 - Terraform does not detect manual changes made in AWS Console unless refreshed.
