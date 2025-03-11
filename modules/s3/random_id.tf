@@ -1,0 +1,7 @@
+resource "random_id" "unique_suffix" {
+  byte_length = 8
+   lifecycle {
+    create_before_destroy = true
+  }
+}
+

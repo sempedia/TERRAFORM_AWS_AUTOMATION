@@ -1,0 +1,55 @@
+.
+├── adr
+├── directory_structure.png
+├── directory_structure.puml
+├── environments
+│   ├── dev
+│   ├── prod
+│   └── qa
+│       └── qa.auto.tfvars
+├── graph.png
+├── main.tf
+├── modules
+│   ├── ec2
+│   │   ├── data_sources.tf
+│   │   ├── ec2.tf
+│   │   ├── locals.tf
+│   │   ├── outputs.tf
+│   │   └── variables.tf
+│   ├── eip
+│   │   ├── eip_association.tf
+│   │   ├── eip.tf
+│   │   ├── outputs.tf
+│   │   └── variables.tf
+│   ├── github
+│   │   ├── github.tf
+│   │   └── variables.tf
+│   ├── iam
+│   │   └── iam.tf
+│   ├── s3
+│   │   ├── locals.tf
+│   │   ├── outputs.tf
+│   │   ├── random_id.tf
+│   │   ├── s3_security.tf
+│   │   └── s3.tf
+│   └── vpc
+│       ├── data_sources.tf
+│       ├── internet_gateway.tf
+│       ├── outputs.tf
+│       ├── public_subnet.tf
+│       ├── route_table.tf
+│       ├── route.tf
+│       ├── rt_association.tf
+│       ├── vpc_security.tf
+│       └── vpc.tf
+├── outputs.tf
+├── plans
+├── providers.tf
+├── README.md
+├── scripts
+│   ├── user_data
+│   └── variables.tf
+├── terraform.tfvars
+└── variables.tf
+
+15 directories, 38 files
