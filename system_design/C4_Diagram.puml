@@ -1,0 +1,126 @@
+@startuml
+
+
+!include C4_Container.puml
+!include C4_Component.puml
+
+' Use the C4 model elements
+
+' Context Level: System Overview
+System_Boundary(tfsystem, "TERRAFORM_AWS_AUTOMATION") {
+  Container(modules, "Modules", "Contains all the Terraform modules.") {
+    Container(ec2, "EC2 Module", "EC2 Instance configuration", "Terraform")
+    Container(vpc, "VPC Module", "VPC configuration", "Terraform")
+    Container(eip, "EIP Module", "Elastic IP configuration", "Terraform")
+    Container(s3, "S3 Module", "S3 bucket configuration", "Terraform")
+    Container(iam, "IAM Module", "IAM Role configuration", "Terraform")
+    Container(github, "GitHub Module", "GitHub integration", "Terraform")
+  }
+
+  Container(environments, "Environments", "Different deployment environments (dev, qa, prod)") {
+    Container(dev, "Dev", "Development environment", "Terraform")
+    Container(qa, "QA", "Quality Assurance environment", "Terraform")
+    Container(prod, "Prod", "Production environment", "Terraform")
+  }
+}
+
+' Connections between top-level components
+tfsystem -down-> modules : "Contains"
+tfsystem -down-> environments : "Contains"
+modules -down-> ec2 : "Contains"
+modules -down-> vpc : "Contains"
+modules -down-> eip : "Contains"
+modules -down-> s3 : "Contains"
+modules -down-> iam : "Contains"
+modules -down-> github : "Contains"
+environments -down-> dev : "Uses EC2 Module"
+environments -down-> qa : "Uses EC2 Module"
+environments -down-> prod : "Uses EC2 Module"
+
+' Inside Containers Level: Show Relationships Between Files in Modules
+Container(ec2files, "EC2 Files", "Files inside EC2 Module", "Terraform")
+Container(vpcfiles, "VPC Files", "Files inside VPC Module", "Terraform")
+Container(eipfiles, "EIP Files", "Files inside EIP Module", "Terraform")
+Container(s3files, "S3 Files", "Files inside S3 Module", "Terraform")
+Container(iamfiles, "IAM Files", "Files inside IAM Module", "Terraform")
+Container(githubfiles, "GitHub Files", "Files inside GitHub Module", "Terraform")
+
+' Relationship between module files
+ec2 -down-> ec2files : "Uses"
+vpc -down-> vpcfiles : "Uses"
+eip -down-> eipfiles : "Uses"
+s3 -down-> s3files : "Uses"
+iam -down-> iamfiles : "Uses"
+github -down-> githubfiles : "Uses"
+
+' File relationships and logic flow for EC2 Module
+Component(ec2files, "ec2.tf", "Terraform EC2 configuration file", "Terraform")
+Component(ec2files, "locals.tf", "Local variables for EC2", "Terraform")
+Component(ec2files, "variables.tf", "Input variables for EC2", "Terraform")
+Component(ec2files, "outputs.tf", "Outputs for EC2", "Terraform")
+
+ec2files -down-> ec2 : "Configures EC2 Instance"
+ec2files -down-> "locals.tf" : "Defines locals"
+ec2files -down-> "variables.tf" : "Specifies input variables"
+ec2files -down-> "outputs.tf" : "Defines output values"
+
+' File relationships and logic flow for VPC Module
+Component(vpcfiles, "vpc.tf", "Terraform VPC configuration file", "Terraform")
+Component(vpcfiles, "public_subnet.tf", "Public Subnet configuration", "Terraform")
+Component(vpcfiles, "internet_gateway.tf", "Internet Gateway configuration", "Terraform")
+Component(vpcfiles, "route_table.tf", "Route Table configuration", "Terraform")
+Component(vpcfiles, "route.tf", "Route configuration", "Terraform")
+Component(vpcfiles, "rt_association.tf", "Route Table Association", "Terraform")
+Component(vpcfiles, "vpc_security.tf", "VPC Security configuration", "Terraform")
+Component(vpcfiles, "data_sources.tf", "Data sources for VPC", "Terraform")
+Component(vpcfiles, "outputs.tf", "Outputs for VPC", "Terraform")
+
+vpcfiles -down-> vpc : "Configures VPC"
+vpcfiles -down-> "public_subnet.tf" : "Defines Public Subnet"
+vpcfiles -down-> "internet_gateway.tf" : "Defines Internet Gateway"
+vpcfiles -down-> "route_table.tf" : "Defines Route Table"
+vpcfiles -down-> "route.tf" : "Defines Route"
+vpcfiles -down-> "rt_association.tf" : "Associates Route Table"
+vpcfiles -down-> "vpc_security.tf" : "Defines VPC Security"
+vpcfiles -down-> "data_sources.tf" : "Defines Data Sources"
+vpcfiles -down-> "outputs.tf" : "Defines output values"
+
+' File relationships and logic flow for EIP Module
+Component(eipfiles, "eip.tf", "Terraform EIP configuration file", "Terraform")
+Component(eipfiles, "eip_association.tf", "EIP Association configuration", "Terraform")
+Component(eipfiles, "variables.tf", "Input variables for EIP", "Terraform")
+Component(eipfiles, "outputs.tf", "Outputs for EIP", "Terraform")
+
+eipfiles -down-> eip : "Configures EIP"
+eipfiles -down-> "eip_association.tf" : "Associates EIP"
+eipfiles -down-> "variables.tf" : "Specifies input variables"
+eipfiles -down-> "outputs.tf" : "Defines output values"
+
+' File relationships and logic flow for S3 Module
+Component(s3files, "s3.tf", "Terraform S3 configuration file", "Terraform")
+Component(s3files, "s3_security.tf", "S3 Security configuration", "Terraform")
+Component(s3files, "random_id.tf", "Random ID for S3", "Terraform")
+Component(s3files, "locals.tf", "Local variables for S3", "Terraform")
+Component(s3files, "outputs.tf", "Outputs for S3", "Terraform")
+
+s3files -down-> s3 : "Configures S3"
+s3files -down-> "s3_security.tf" : "Defines S3 Security"
+s3files -down-> "random_id.tf" : "Generates Random ID"
+s3files -down-> "locals.tf" : "Defines locals"
+s3files -down-> "outputs.tf" : "Defines output values"
+
+' File relationships and logic flow for IAM Module
+Component(iamfiles, "iam.tf", "Terraform IAM configuration file", "Terraform")
+
+iamfiles -down-> iam : "Configures IAM"
+
+' File relationships and logic flow for GitHub Module
+Component(githubfiles, "github.tf", "Terraform GitHub configuration file", "Terraform")
+Component(githubfiles, "providers.tf", "Providers for GitHub", "Terraform")
+Component(githubfiles, "variables.tf", "Input variables for GitHub", "Terraform")
+
+githubfiles -down-> github : "Configures GitHub"
+githubfiles -down-> "providers.tf" : "Defines Providers"
+githubfiles -down-> "variables.tf" : "Specifies input variables"
+
+@enduml
