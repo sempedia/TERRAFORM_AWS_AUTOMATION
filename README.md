@@ -1,26 +1,30 @@
 # EC2 Terraform Repo
 
-This repository contains Terraform configurations to deploy an **AWS EC2 instance** using Infrastructure as Code (IaC).
+This repository contains Terraform configurations to deploy and manage AWS infrastructure using Infrastructure as Code (IaC).
 
 ## 📌 Features
-- Creates an **Amazon Linux 2023** EC2 instance.
-- Configures security groups for secure access.
-- Uses Terraform variables for easy customization.
-- Manages infrastructure changes efficiently.
+✅ Deploys an Amazon EC2 instance with customizable configurations.
+✅ Configures Elastic IPs (EIP) for static public IP assignments.
+✅ Manages IAM roles and permissions for secure access.
+✅ Creates S3 buckets with security policies.
+✅ Provisions VPC, Subnets, and Route Tables for network configuration.
+✅ Automates GitHub repository setup using Terraform.
 
 ## 🛠 Prerequisites
 Before you begin, ensure you have:
 - **Terraform** installed → [Install Terraform](https://developer.hashicorp.com/terraform/tutorials/aws-get-started/install-cli)
 - **AWS CLI** configured → [AWS CLI Setup](https://docs.aws.amazon.com/cli/latest/userguide/install-cliv2.html)
-- An **AWS IAM User** with required permissions (EC2 and IAM).
+- An **AWS IAM User** with required permissions (EC2, S3, IAM, GitHub).
+- A GitHub Personal Access Token for managing repositories.
+
 
 ## 🚀 Usage
 
 ### 1️⃣ Clone the repository
 
 ```sh
-git clone git@github.com:sempedia/EC2_TF_Repo.git
-cd EC2_TF_Repo
+git clone https://github.com/sempedia/TERRAFORM_AWS_AUTOMATION.git
+cd TERRAFORM_AWS_AUTOMATION
 ```
 
 ### 2️⃣ Initialize Terraform
@@ -50,16 +54,81 @@ terraform destroy
 
 ## 🔧 Configuration
 
-You can modify `var.tf` to customize:
-- Instance type
-- AWS region
-- Security group rules
-
-To pass variables dynamically, use:
+You can customize your infrastructure by editing terraform.tfvars or passing variables dynamically:
 
 ```sh
 export TF_VAR_variable_name="value"
 ```
+
+Key Configurable Variables
+EC2 Instance Type
+AWS Region
+Security Group Rules
+S3 Bucket Policies
+VPC Subnets and Routes
+GitHub Repository Name & Settings
+
+## Project Structure
+TERRAFORM_AWS_AUTOMATION
+
+.
+├── C4_Diagram.puml
+├── environments
+│   └── qa
+│       └── qa.auto.tfvars
+├── main.tf
+├── modules
+│   ├── ec2
+│   │   ├── data_sources.tf
+│   │   ├── ec2.tf
+│   │   ├── locals.tf
+│   │   ├── outputs.tf
+│   │   └── variables.tf
+│   ├── eip
+│   │   ├── eip_association.tf
+│   │   ├── eip.tf
+│   │   ├── outputs.tf
+│   │   └── variables.tf
+│   ├── github
+│   │   ├── github.tf
+│   │   ├── providers.tf
+│   │   └── variables.tf
+│   ├── iam
+│   │   └── iam.tf
+│   ├── s3
+│   │   ├── locals.tf
+│   │   ├── outputs.tf
+│   │   ├── random_id.tf
+│   │   ├── s3_security.tf
+│   │   └── s3.tf
+│   └── vpc
+│       ├── data_sources.tf
+│       ├── internet_gateway.tf
+│       ├── outputs.tf
+│       ├── public_subnet.tf
+│       ├── route_table.tf
+│       ├── route.tf
+│       ├── rt_association.tf
+│       ├── vpc_security.tf
+│       └── vpc.tf
+├── outputs.tf
+├── plans
+│   └── instance_type_and_count.plan
+├── plantuml.jar
+├── providers.tf
+├── README.md
+├── scripts
+│   ├── user_data
+│   └── variables.tf
+├── system_design
+│   └── C4_Diagram.png
+├── terraform.tfvars
+└── variables.tf
+
+13 directories, 40 files
+
+
+
 
 ## 📝 Notes
 - Terraform does not detect manual changes made in AWS Console unless refreshed.

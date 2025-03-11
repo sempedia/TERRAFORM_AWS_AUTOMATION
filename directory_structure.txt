@@ -1,13 +1,8 @@
 .
-├── adr
-├── directory_structure.png
-├── directory_structure.puml
+├── C4_Diagram.puml
 ├── environments
-│   ├── dev
-│   ├── prod
 │   └── qa
 │       └── qa.auto.tfvars
-├── graph.png
 ├── main.tf
 ├── modules
 │   ├── ec2
@@ -23,6 +18,7 @@
 │   │   └── variables.tf
 │   ├── github
 │   │   ├── github.tf
+│   │   ├── providers.tf
 │   │   └── variables.tf
 │   ├── iam
 │   │   └── iam.tf
@@ -44,12 +40,16 @@
 │       └── vpc.tf
 ├── outputs.tf
 ├── plans
+│   └── instance_type_and_count.plan
+├── plantuml.jar
 ├── providers.tf
 ├── README.md
 ├── scripts
 │   ├── user_data
 │   └── variables.tf
+├── system_design
+│   └── C4_Diagram.png
 ├── terraform.tfvars
 └── variables.tf
 
-15 directories, 38 files
+13 directories, 40 files

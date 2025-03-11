@@ -1,0 +1,59 @@
+@startuml directory_structure
+
+' Use the C4 model elements
+!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Container.puml
+!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Component.puml
+
+' Context Level: System Overview
+System_Boundary(tfsystem, "TERRAFORM_AWS_AUTOMATION") {
+    Container(modules, "Modules", "Contains all the Terraform modules.") {
+        Container(ec2, "EC2 Module", "EC2 Instance configuration", "Terraform")
+        Container(vpc, "VPC Module", "VPC configuration", "Terraform")
+        Container(eip, "EIP Module", "Elastic IP configuration", "Terraform")
+        Container(s3, "S3 Module", "S3 bucket configuration", "Terraform")
+        Container(iam, "IAM Module", "IAM Role configuration", "Terraform")
+        Container(github, "GitHub Module", "GitHub integration", "Terraform")
+    }
+
+    Container(environments, "Environments", "Different deployment environments (dev, qa, prod)") {
+        Container(dev, "Dev", "Development environment", "Terraform")
+        Container(qa, "QA", "Quality Assurance environment", "Terraform")
+        Container(prod, "Prod", "Production environment", "Terraform")
+    }
+}
+
+' Connections between top-level components
+tfsystem -down-> modules : "Contains"
+tfsystem -down-> environments : "Contains"
+modules -down-> ec2 : "Contains"
+modules -down-> vpc : "Contains"
+modules -down-> eip : "Contains"
+modules -down-> s3 : "Contains"
+modules -down-> iam : "Contains"
+modules -down-> github : "Contains"
+environments -down-> dev : "Uses EC2 Module"
+environments -down-> qa : "Uses EC2 Module"
+environments -down-> prod : "Uses EC2 Module"
+
+' Inside Containers Level: Show Relationships Between Files in Modules
+Container(ec2files, "EC2 Files", "Files inside EC2 Module", "Terraform")
+Container(vpcfiles, "VPC Files", "Files inside VPC Module", "Terraform")
+Container(s3files, "S3 Files", "Files inside S3 Module", "Terraform")
+
+' Relationship between module files
+ec2 -down-> ec2files : "Uses"
+vpc -down-> vpcfiles : "Uses"
+s3 -down-> s3files : "Uses"
+
+' File relationships and logic flow
+Component(ec2files, "ec2.tf", "Terraform EC2 configuration file", "Terraform")
+Component(ec2files, "locals.tf", "Local variables for EC2", "Terraform")
+Component(ec2files, "variables.tf", "Input variables for EC2", "Terraform")
+Component(ec2files, "outputs.tf", "Outputs for EC2", "Terraform")
+
+ec2files -down-> ec2 : "Configures EC2 Instance"
+ec2files -down-> "locals.tf" : "Defines locals"
+ec2files -down-> "variables.tf" : "Specifies input variables"
+ec2files -down-> "outputs.tf" : "Defines output values"
+
+@enduml
