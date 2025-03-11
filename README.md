@@ -3,12 +3,14 @@
 This repository contains Terraform configurations to deploy and manage AWS infrastructure using Infrastructure as Code (IaC).
 
 ## 📌 Features
+```
 ✅ Deploys multiple Amazon EC2 instances with customizable configurations.
 ✅ Configures Elastic IPs (EIP) for static public IP assignments.
 ✅ Manages IAM roles and permissions for secure access.
 ✅ Creates S3 buckets with security policies.
 ✅ Provisions VPC, Subnets, and Route Tables for network configuration.
 ✅ Automates GitHub repository setup using Terraform.
+```
 
 ## 🛠 Prerequisites
 Before you begin, ensure you have:
