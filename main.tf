@@ -1,3 +1,49 @@
+# Local storage of the state files
+# Switch Back to S3 in the Future?
+# Uncomment the module "backend" in main.tf
+# Reconfigure the backend to use S3 again:
+# terraform {
+#   backend "s3" {
+#     bucket         = "my-terraform-state-bucket"
+#     key            = "terraform.tfstate"
+#     region         = "us-east-1"
+#     dynamodb_table = "terraform-lock"
+#   }
+# }
+# Run:
+# terraform init -migrate-state
+# This will re-upload your state file to S3.
+
+# terraform {
+#   backend "local" {
+#     path = "terraform.tfstate"
+#   }
+# }
+
+# Remote Storage of the state files
+# If your state is already stored in S3, you need to migrate it back to local storage.
+# Run:
+# terraform init -migrate-state
+# This will migrate your existing remote state (S3) back to your local machine.
+terraform {
+  backend "s3" {
+    bucket         = "tf-state-management-000001"
+    key            = "network/terraform.tfstate"
+    region         = "us-east-1"
+    encrypt        = true
+    dynamodb_table = "terraform-lock"
+  }
+}
+
+module "backend" {
+  source              = "./modules/backend"
+  s3_bucket_name      = "tf-state-management-000001"
+  dynamodb_table_name = "terraform-lock"
+  allowed_aws_arns    = ["arn:aws:iam::123456789012:user/terraform-user"]
+}
+
+
+
 module "vpc" {
   source = "./modules/vpc"
 }

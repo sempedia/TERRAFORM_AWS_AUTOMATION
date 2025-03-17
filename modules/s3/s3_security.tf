@@ -1,5 +1,5 @@
 resource "aws_s3_bucket_public_access_block" "TF_S3_Bucket_Private" {
-  for_each = aws_s3_bucket.TF_S3_Bucket
+  for_each = local.regular_buckets
 
   bucket = each.key # each.key is the name of the bucket
 
